@@ -31,14 +31,19 @@ def coleta():
    list_dep = obj.deputados()
 
    for dep in list_dep:
-       info = {
-             '_id'    : dep['id'],
-             'Nome'   : dep['nome'],
-             'Partido': dep['siglaPartido'],
-             'Foto'   : dep['urlFoto'],
-			 'Estado' : dep['siglaUf']
-       }
-       list_deputados.append(info)
+	   id   = dep['id']
+       infodep = list_dep.deputado_despesas(id)
+	   for info in infodep:
+			valorGasto += round(float(info['valorLiquido']),2)
+	   info = {
+	   		'_id'    : dep['id'],
+	   		'Nome'   : dep['nome'],
+	   		'Partido': dep['siglaPartido'],
+	   		'Foto'   : dep['urlFoto'],
+	   		'Estado' : dep['siglaUf'],
+			'Gasto'  : valorGasto
+	   }
+	   list_deputados.append(info)
 
 
    # Inserindo dados no mongodb

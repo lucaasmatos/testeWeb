@@ -41,6 +41,7 @@
         <th>Nome</th>
         <th>Estado</th>
         <th>Partido</th>
+		<th>Gastos</th>
         <th>Gastos Atuais</th>
         <th>Orgãos Participantes</th>
     </tr>
@@ -50,6 +51,7 @@
         <td>{{ lista['Nome']        }}</td>
         <td>{{ lista['Estado']     }}</td>
         <td>{{ lista['Partido']}}</td>
+		<td>{{ lista['Gasto']}}</td>
         <td><a href=/gastos/{{lista['_id']}}>Verificar Gastos</a></td>
         <td><a href=/orgaos/{{lista['_id']}}>Verificar Orgãos</a></td>       
      </tr>

@@ -41,7 +41,7 @@ def deputado(id):
    line_labels = valores.keys()
    line_values = valores.values()
     
-   return render_template('gastos.html', title='GrĂ¡fico de Gastos', max= round(valorGasto,0), labels=line_labels, values=line_values, listaGastos=gastos, totalGasto=round(valorGasto,2))
+   return render_template('gastos.html', title='Gráfico de Gastos', max= round(valorGasto,0), labels=line_labels, values=line_values, listaGastos=gastos, totalGasto=round(valorGasto,2))
 
 @app.route("/orgaos/<id>")
 def eventos(id):
