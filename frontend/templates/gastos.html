@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ title }}</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+
+  <style>
+            h1{
+                color: black;
+                font-family: verdana;
+                font-size: 300%;
+            }
+            table {
+              width:70%;
+            }
+            table, th, td {
+               border: 1px solid black;
+               border-collapse: collapse;
+            }
+            th, td {
+                padding: 15px;
+                text-align: center;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color: #fff;
+            }
+            table#t01 th {
+              background-color: black;
+              color: white;
+            }        
+         </style>    
+
+</head>
+
+<body>
+  <center>
+    <h1>{{ title }}</h1>
+
+    <canvas id="chart" width="600" height="400"></canvas>
+    <script>
+      // bar chart data
+      var barData = {
+        labels : [
+          {% for item in labels %}
+            "{{ item }}",
+          {% endfor %}
+        ],
+        datasets : [{
+          fillColor: "rgba(151,187,205,0.2)",
+          strokeColor: "rgba(151,187,205,1)",
+          pointColor: "rgba(151,187,205,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          bezierCurve : false,
+          data : [
+	    {% for item in values %}
+              {{ item }},
+            {% endfor %}]
+          }
+	]
+      }
+      Chart.defaults.global.animationSteps = 50;
+      Chart.defaults.global.tooltipYPadding = 16;
+      Chart.defaults.global.tooltipCornerRadius = 0;
+      Chart.defaults.global.tooltipTitleFontStyle = "normal";
+      Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+      Chart.defaults.global.animationEasing = "easeOutBounce";
+      Chart.defaults.global.responsive = false;
+      Chart.defaults.global.scaleLineColor = "black";
+      Chart.defaults.global.scaleFontSize = 16;
+      // get bar chart canvas
+      var mychart = document.getElementById("chart").getContext("2d");
+      steps = 10
+      max = {{ max }}
+      // draw bar chart
+      var LineChartDemo = new Chart(mychart).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+      });
+    </script>
+ 
+
+  <h1> Lista de Gastos </h1>
+
+
+<table> 
+    <tr>
+        <th>Empresa</th>
+        <th>Tipo Despesa</th>
+        <th>Data</th>
+        <th>Valor</th>        
+    </tr>
+{% for lista in listaGastos %}
+      <tr>
+        <td>{{ lista['nomeFornecedor']}}</td>
+        <td>{{ lista['tipoDespesa']}}</td>
+        <td>{{ lista['dataDocumento']}}</td>
+        <td>{{ lista['valorDocumento']}}</td>           
+     </tr>
+     
+{% endfor %}
+</table>
+
+<br/> 
+<br/>
+<a><b>Total de Gastos: {{ totalGasto }}</b></a>
+<br/> 
+<br/> 
+
+<a href="javascript:history.back()"><input type="button" value="Voltar para lista anterior" /></a>
+</center>
+<button>
+</body>
+</html>

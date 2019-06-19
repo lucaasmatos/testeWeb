@@ -1,0 +1,22 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+
+  backend:
+    image: lucaasmatos/app-back:latest
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+
+  frontend:
+    container_name: frontend
+    image: lucaasmatos/app-front:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend
+    links:
+      - mongodb
+      - backend

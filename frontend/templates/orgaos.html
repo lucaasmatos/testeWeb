@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            h1{
+                color: black;
+                font-family: verdana;
+                font-size: 300%;
+            }
+            table {
+              width:70%;
+            }
+            table, th, td {
+               border: 1px solid black;
+               border-collapse: collapse;
+            }
+            th, td {
+                padding: 15px;
+                text-align: center;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color: #fff;
+            }
+            table#t01 th {
+              background-color: black;
+              color: white;
+            }        
+         </style>    
+    </head>        
+<body>
+  <center>
+<h1> Lista de Orgãos </h1>
+
+
+<table> 
+    <tr>
+        <th>Sigla</th>
+        <th>Nome</th>
+        <th>Data</th>
+    </tr>
+{% for lista in listas %}
+      <tr>
+        <td>{{ lista['siglaOrgao']        }}</td>
+        <td>{{ lista['nomeOrgao']     }}</td>
+        <td>{{ lista['dataInicio']}}</td>
+     </tr>
+     
+{% endfor %}
+</table>
+<br/> 
+<br/> 
+<a href="javascript:history.back()"><input type="button" value="Voltar para lista anterior" /></a>
+  </center>
+</body>
+</html>
